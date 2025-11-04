@@ -1,0 +1,53 @@
+---
+- name: "wipe_disks:wipe_filesystem_signatures"
+  loop: "{{ wipe_disks }}"
+  loop_control:
+    loop_var: "disk"
+    label: "{{ disk }}"
+  ansible.builtin.command:
+    argv:
+      - "wipefs"
+      - "-a"
+      - "{{ disk }}"
+
+- name: "wipe_disks:zero_disk:lazy_dd"
+  when: "wipe_disks_type == 'lazy_dd'"
+  loop: "{{ wipe_disks }}"
+  loop_control:
+    loop_var: "disk"
+    label: "{{ disk }}"
+  changed_when: true
+  ansible.builtin.command:
+    argv:
+      - "dd"
+      - "if={{ wipe_disks_dd_input }}"
+      - "of={{ disk }}"
+      - "bs={{ wipe_disks_dd_blocksize }}"
+      - "count={{ wipe_disks_dd_lazy_count }}"
+
+- name: "wipe_disks:zero_disk:full_dd"
+  when: "wipe_disks_type == 'full_dd'"
+  loop: "{{ wipe_disks }}"
+  loop_control:
+    loop_var: "disk"
+    label: "{{ disk }}"
+  changed_when: true
+  ansible.builtin.command:
+    argv:
+      - "dd"
+      - "if={{ wipe_disks_dd_input }}"
+      - "of={{ disk }}"
+      - "bs={{ wipe_disks_dd_blocksize }}"
+      - "conv=sync,noerror"
+
+- name: "wipe_disks:zero_disk:blkdiscard"
+  when: "wipe_disks_type == 'blkdiscard'"
+  loop: "{{ wipe_disks }}"
+  loop_control:
+    loop_var: "disk"
+    label: "{{ disk }}"
+  changed_when: true
+  ansible.builtin.command:
+    argv:
+      - "blkdiscard"
+      - "{{ disk }}"

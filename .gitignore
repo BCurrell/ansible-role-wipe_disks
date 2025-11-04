@@ -1,0 +1,13 @@
+**
+
+!.git*
+!README*
+
+!/defaults/
+!/defaults/main.yaml
+
+!/meta/
+!/meta/main.yaml
+
+!/tasks/
+!/tasks/main.yaml

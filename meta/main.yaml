@@ -1,0 +1,8 @@
+---
+galaxy_info:
+  role_name: "wipe_disks"
+  namespace: "bcurrell"
+  author: "Brandon Currell <brandon@currell.pw"
+  description: "Ansible role for wiping disks with 2 types: lazy vs full"
+  license: "MIT"
+  min_ansible_version: "2.19"

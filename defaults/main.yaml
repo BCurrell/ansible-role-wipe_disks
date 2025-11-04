@@ -1,0 +1,15 @@
+---
+# List of disk paths to wipe
+wipe_disks: []
+
+# Method for wiping the disks: lazy_dd, full_dd, blkdiscard
+wipe_disks_type: "lazy_dd"
+
+# Input device for overwriting the disk path, recommend /dev/zero or /dev/urandom
+wipe_disks_dd_input: "/dev/zero"
+
+# Block size for overwriting the disk path
+wipe_disks_dd_blocksize: "1M"
+
+# Number of blocks to overwrite in lazy mode
+wipe_disks_dd_lazy_count: "10"
