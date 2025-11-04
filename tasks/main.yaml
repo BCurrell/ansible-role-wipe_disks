@@ -10,8 +10,8 @@
       - "-a"
       - "{{ disk }}"
 
-- name: "wipe_disks:zero_disk:lazy_dd"
-  when: "wipe_disks_type == 'lazy_dd'"
+- name: "wipe_disks:zero_disk:dd_lazy"
+  when: "wipe_disks_type == 'dd_lazy'"
   loop: "{{ wipe_disks }}"
   loop_control:
     loop_var: "disk"
@@ -25,8 +25,8 @@
       - "bs={{ wipe_disks_dd_blocksize }}"
       - "count={{ wipe_disks_dd_lazy_count }}"
 
-- name: "wipe_disks:zero_disk:full_dd"
-  when: "wipe_disks_type == 'full_dd'"
+- name: "wipe_disks:zero_disk:dd_full"
+  when: "wipe_disks_type == 'dd_full'"
   loop: "{{ wipe_disks }}"
   loop_control:
     loop_var: "disk"

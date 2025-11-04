@@ -2,8 +2,8 @@
 # List of disk paths to wipe
 wipe_disks: []
 
-# Method for wiping the disks: lazy_dd, full_dd, blkdiscard
-wipe_disks_type: "lazy_dd"
+# Method for wiping the disks: dd_lazy, dd_full, blkdiscard
+wipe_disks_type: "dd_lazy"
 
 # Input device for overwriting the disk path, recommend /dev/zero or /dev/urandom
 wipe_disks_dd_input: "/dev/zero"
