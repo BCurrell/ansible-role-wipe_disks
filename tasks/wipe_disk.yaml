@@ -1,7 +1,7 @@
 ---
 - name: "wipe_disks:wipe_filesystem_signatures"
   ansible.builtin.command:
-    cmd: "wipefs -a {{ disk.path }}"
+    cmd: "wipefs -a -f {{ disk.path }}"
 
 - name: "wipe_disks:dd_lazy:{{ disk.path }}"
   when: "disk.type | default(wipe_disks_default_type) == 'dd_lazy'"
@@ -12,6 +12,7 @@
 - name: "wipe_disks:dd_full:{{ disk.path }}"
   when: "disk.type | default(wipe_disks_default_type) == 'dd_full'"
   changed_when: true
+  check_mode: false
   ansible.builtin.command:
     cmd: "dd if={{ disk.dd_if | default(wipe_disks_default_dd_if) }} bs={{ disk.dd_bs | default(wipe_disks_default_dd_bs) }} {{ disk.dd_extra | default(wipe_disks_default_dd_extra) }} of={{ disk.path }}"
 
