@@ -1,15 +1,29 @@
 ---
-# List of disk paths to wipe
+# List of objects containing path to wipe and type to use:
+# - path: "/path/to/disk"
+#   type: "type"
+#   dd_if: "/dev/zero"
+#   dd_bs: "1M"
+#   dd_lazy_count: "10"
+#   dd_extra: ""
+#   blkdiscard_secure: false
 wipe_disks: []
 
-# Method for wiping the disks: dd_lazy, dd_full, blkdiscard
-wipe_disks_type: "dd_lazy"
+# Default type if not specified in wipe_disks list object
+wipe_disks_default_type: "dd_lazy"
 
-# Input device for overwriting the disk path, recommend /dev/zero or /dev/urandom
-wipe_disks_dd_input: "/dev/zero"
+# Default dd input filesystem (if) argument if not specified in wipe_disks list object
+# Recommended to use /dev/zero or /dev/urandom
+wipe_disks_default_dd_if: "/dev/zero"
 
-# Block size for overwriting the disk path
-wipe_disks_dd_blocksize: "1M"
+# Default dd block size (bs) argument if not specified in wipe_disks list object
+wipe_disks_default_dd_bs: "1M"
 
-# Number of blocks to overwrite in lazy mode
-wipe_disks_dd_lazy_count: "10"
+# Default dd_lazy count argument if not specified in wipe_disks list object
+wipe_disks_default_dd_lazy_count: "10"
+
+# Default dd extra arguments if not specified in wipe_disks list object
+wipe_disks_default_dd_extra: "conv=sync,noerror"
+
+# Default blkdiscard secure mode if not specified in wipe_disks list object
+wipe_disks_default_blkdiscard_secure: false

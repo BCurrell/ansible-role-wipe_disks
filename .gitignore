@@ -11,3 +11,5 @@
 
 !/tasks/
 !/tasks/main.yaml
+
+!/tasks/wipe_disk.yaml
