@@ -3,19 +3,19 @@
   ansible.builtin.command:
     cmd: "wipefs -a {{ disk.path }}"
 
-- name: "wipe_disks:zero_disk:dd_lazy"
+- name: "wipe_disks:dd_lazy:{{ disk.path }}"
   when: "disk.type | default(wipe_disks_default_type) == 'dd_lazy'"
   changed_when: true
   ansible.builtin.command:
     cmd: "dd if={{ disk.dd_if | default(wipe_disks_default_dd_if) }} bs={{ disk.dd_bs | default(wipe_disks_default_dd_bs) }} count={{ disk.dd_lazy_count | default(wipe_disks_default_dd_lazy_count) }} {{ disk.dd_extra | default(wipe_disks_default_dd_extra) }} of={{ disk.path }}"
 
-- name: "wipe_disks:zero_disk:dd_full"
+- name: "wipe_disks:dd_full:{{ disk.path }}"
   when: "disk.type | default(wipe_disks_default_type) == 'dd_full'"
   changed_when: true
   ansible.builtin.command:
     cmd: "dd if={{ disk.dd_if | default(wipe_disks_default_dd_if) }} bs={{ disk.dd_bs | default(wipe_disks_default_dd_bs) }} {{ disk.dd_extra | default(wipe_disks_default_dd_extra) }} of={{ disk.path }}"
 
-- name: "wipe_disks:zero_disk:blkdiscard"
+- name: "wipe_disks:blkdiscard:{{ disk.path }}"
   when: "disk.type | default(wipe_disks_default_type) == 'blkdiscard'"
   changed_when: true
   ansible.builtin.command:
