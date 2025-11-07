@@ -1,5 +1,5 @@
 ---
-- name: "wipe_disks:{{ disk.path }}"
+- name: "wipe_disks:loop"
   loop: "{{ wipe_disks }}"
   loop_control:
     loop_var: "disk"
