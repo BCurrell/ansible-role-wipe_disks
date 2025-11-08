@@ -11,8 +11,12 @@
 
 - name: "wipe_disks:dd_full:{{ disk.path }}"
   when: "disk.type | default(wipe_disks_default_type) == 'dd_full'"
+  register: "result_dd_full"
   changed_when: true
-  check_mode: false
+  failed_when:
+    # TODO: Check if this is the right way to handle this
+    - "result_dd_full.rc != 0"
+    - "'No space left on device' not in result_dd_full.stderr"
   ansible.builtin.command:
     cmd: "dd if={{ disk.dd_if | default(wipe_disks_default_dd_if) }} bs={{ disk.dd_bs | default(wipe_disks_default_dd_bs) }} {{ disk.dd_extra | default(wipe_disks_default_dd_extra) }} of={{ disk.path }}"
 
