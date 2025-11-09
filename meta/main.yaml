@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: "wipe_disks"
   namespace: "bcurrell"
-  author: "Brandon Currell <brandon@currell.pw"
+  author: "Brandon Currell <brandon@currell.pw>"
   description: "Ansible role for wiping disks with multiple methods."
   license: "MIT"
   min_ansible_version: "2.19"
